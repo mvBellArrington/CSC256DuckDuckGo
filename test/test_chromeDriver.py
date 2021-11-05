@@ -11,7 +11,7 @@ def start_chrome():
 
 def test_is_chrome_webdriver():
     driver = webdriver.Chrome()
-    assert driver.name == "Chrome"
+    assert driver.name == "chrome"
 
 
 def test_opens_wikipedia():
@@ -26,12 +26,12 @@ def test_search_wake_tech():
     website = "https://www.wikipedia.org/"
     driver.get(website)
     item_to_search = "wake tech"
-    searchField = driver.find_element(By.NAME, "search") # driver.find_element_by_name("search") <-- this method is deprecated
+    searchField = driver.find_element(By.ID, "searchInput") # driver.find_element_by_name("search") <-- this method is deprecated
     searchField.clear()
     searchField.send_keys(item_to_search)
 
-
-    assert searchField.text == "wake tech"
+    current_search_field = searchField.get_attribute("value")
+    assert current_search_field == "wake tech"
 
 
 def test_content_page_title_WTCC():
@@ -39,14 +39,26 @@ def test_content_page_title_WTCC():
     website = "https://www.wikipedia.org/"
     driver.get(website)
     item_to_search = "wake tech"
-    searchField = driver.find_element(By.NAME, "search") # driver.find_element_by_name("search") <-- this method is deprecated
+    searchField = driver.find_element(By.ID, "searchInput") # driver.find_element_by_name("search") <-- this method is deprecated
     searchField.clear()
     searchField.send_keys(item_to_search)
     searchField.send_keys(Keys.ENTER)
     sleep(8)
     site_title = driver.find_element(By.ID, "firstHeading").text # driver.find_element_by_id("firstHeading").text <-- this method is deprecated
 
-    assert site_title == "Wake Tech Community College"
+    assert site_title == "Wake Technical Community College"
+
+#def main():
+#    test_is_chrome_webdriver()
+#    test_opens_wikipedia()
+#    test_search_wake_tech()
+#    test_content_page_title_WTCC()
+
+
+
+
+#main()
+
 
 
 
