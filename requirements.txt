@@ -1,2 +1,1 @@
-pytest
-requests
+pytest==4.6
